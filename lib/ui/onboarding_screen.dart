@@ -64,11 +64,53 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 description: Constants.descriptionThree,
               ),
             ],
-          )
+          ),
+          Positioned(
+            bottom: 80,
+            left: 30,
+            child: Row(
+              children: _buildIndicator(),
+            ),
+          ),
         ],
       ),
     );
   }
+
+  //Create the indicator decoration widget
+Widget _indicator(bool isActive) {
+  return AnimatedContainer(
+    duration: const Duration(
+      milliseconds: 300,
+    ),
+    height: 10,
+    width: isActive ? 20 : 8,
+    margin: const EdgeInsets.only(right: 5,),
+    decoration: BoxDecoration(
+      color: Constants.primaryColor,
+      borderRadius: BorderRadius.circular(5),
+    ),
+  );
+}
+
+
+//Create the indicator list
+
+List<Widget> _buildIndicator() {
+  List<Widget> indicators = [];
+
+  for(int i = 0; i < 3; i++) {
+    if (currentIndex == i) {
+      indicators.add(_indicator(true));
+    } else {
+      indicators.add(_indicator(false));
+    }
+  }
+
+  return indicators;
+}
+
+
 }
 
 class createPage extends StatelessWidget {
